@@ -1,0 +1,11 @@
+AUWC Fellowship — Vercel + Aiven MySQL
+
+1. Upload this whole folder to GitHub (images/ folder with your team photos too).
+2. Vercel > Project > Settings > Environment Variables:
+   DB_HOST          mysql-38153e6c-malkamumulatu4-e33c.l.aivencloud.com
+   DB_PORT          15186
+   DB_USER          avnadmin
+   DB_PASSWORD      (NEW Aiven password)
+   DB_NAME          defaultdb
+   TEAM_PASSWORDS   {"love":"...","actions":"...","worship":"...","choir":"...","art":"...","fund":"..."}
+3. Redeploy. The table "registrations" is created automatically on first use.

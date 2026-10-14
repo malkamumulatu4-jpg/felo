@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a1550">
+  <meta name="description" content="AUWC Fellowship — register and join a ministry team.">
+  <title>AUWC Fellowship — Ministry Team Registration</title>
+
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <link rel="apple-touch-icon" href="images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="logo"><img src="images/logo.png" alt="FOCUS logo" width="58" height="58"><span class="logo-fb">FOCUS</span></div>
+        <div class="brand-text">
+          <h1>AUWC Fellowship</h1>
+          <p>AUWC Focus Ethiopian Christian Student Fellowship</p>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Main">
+        <button class="nav-btn active" data-nav="register" type="button">Register</button>
+        <button class="nav-btn" data-nav="login" type="button">Team Login</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="hero">
+    <div class="hero-inner">
+      <div class="logo lg"><img src="images/logo.png" alt="FOCUS — Fellowship of Oromo Christian University Students" width="150" height="150"><span class="logo-fb">FOCUS</span></div>
+      <p class="tagline">Serve  Grow  Belong</p>
+      <h2> <span> Join a Ministry Team</span></h2>
+      <p class="lead">“As every man hath received the gift, even so minister the same one to another, as good stewards of the manifold grace of God."
+                         1Peter4:10 </p>
+    </div>
+    <svg class="hero-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,30 C240,70 480,0 720,25 C960,50 1200,60 1440,20 L1440,60 L0,60 Z" fill="#f3f5fc"/>
+    </svg>
+  </section>
+
+  <main>
+
+    <!-- ============ 1. REGISTRATION ============ -->
+    <section id="view-register" class="view active">
+      <div class="card pull">
+        <h3>Registration Form</h3>
+        <p class="sub">Fill in the form below and choose the team you are interested in.</p>
+
+        <form id="registerForm" novalidate>
+          <div class="field">
+            <label for="fullName">Full Name <span class="req"></span></label>
+            <input id="fullName" type="text" placeholder="please Enter your name " autocomplete="name">
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="department">Department <span class="req"></span></label>
+              <input id="department" type="text" placeholder=" please Enter your  Department">
+            </div>
+            <div class="field">
+              <label for="batch">Batch <span class="req"></span></label>
+              <select id="batch">
+                <option value="">Select batch </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="phone">Telephone <span class="req"></span></label>
+            <input id="phone" type="tel" inputmode="tel" placeholder=" Enter your phone No..09096533.." autocomplete="tel">
+          </div>
+
+          <div class="field">
+            <span class="legend">Choose Your Team(s) <span class="req"></span></span>
+            <p class="hint">Choose at least one team. You can join as many teams as you are interested in.</p>
+            <div class="team-grid" id="teamPicker"></div>
+          </div>
+
+          <button class="btn primary" type="submit">Submit Registration</button>
+        </form>
+
+        <div id="formMessage" class="message" role="status" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- ============ 2. TEAM LOGIN ============ -->
+    <section id="view-login" class="view">
+      <div class="card narrow pull">
+        <h3>Team Dashboard Login</h3>
+        <p class="sub">Each team leader opens only their own team dashboard.</p>
+
+        <form id="loginForm" novalidate>
+          <div class="field">
+            <label for="loginTeam">Select Your Team</label>
+            <select id="loginTeam">
+              <option value=""> Select team  leader</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="loginPass">Team Password</label>
+            <input id="loginPass" type="password" placeholder="Enter your team password" autocomplete="off">
+          </div>
+          <button class="btn primary" type="submit">Open Dashboard</button>
+        </form>
+
+        <div id="loginMessage" class="message" role="status" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- ============ 3. DASHBOARD ============ -->
+    <section id="view-dashboard" class="view">
+      <div class="card" style="margin-top:22px">
+        <img id="dashPhoto" class="dash-photo" src="" alt="" hidden>
+        <div class="dash-head">
+          <div>
+            <h3 id="dashTitle">Team Dashboard </h3>
+            <p class="sub" id="dashSub"></p>
+          </div>
+          <div class="dash-actions">
+            <button class="btn accent" id="exportBtn" type="button">⬇ Export CSV</button>
+            <button class="btn danger" id="logoutBtn" type="button">Logout</button>
+          </div>
+        </div>
+
+        <div class="stats" id="stats"></div>
+
+        <input id="searchInput" class="search" type="search"
+               placeholder="Search by name, department, batch or phone...">
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Full Name</th>
+                <th>Department</th>
+                <th>Batch</th>
+                <th>Telephone</th>
+                <th>Registered</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="dashBody"></tbody>
+          </table>
+        </div>
+
+        <p id="emptyMsg" class="empty" hidden>No registrations yet for this team.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="footer-brand">
+      <div class="logo"><img src="images/logo.png" alt="" width="38" height="38"><span class="logo-fb">FOCUS</span></div>
+      <span>AUWC Fellowship</span>
+    </div>
+    <p>© <span id="year">2026</span> AUWC Focus Ethiopian Christian Student Fellowship</p>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
