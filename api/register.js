@@ -1,4 +1,7 @@
-const { getDb, getTeamPasswords } = require('./_db');
+const { getDb } = require('./_db');
+
+// Fixed list of teams (must match the ids in js/config.js)
+const VALID_TEAMS = ['love', 'actions', 'worship', 'choir', 'art', 'fund'];
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({ error: 'POST only' });
@@ -8,9 +11,8 @@ module.exports = async (req, res) => {
     const department = String(b.department || '').trim();
     const batch = Number(b.batch);
     const phone = String(b.phone || '').trim();
-    const validTeams = Object.keys(getTeamPasswords());
     const teams = [...new Set(Array.isArray(b.teams) ? b.teams.map(String) : [])]
-      .filter(t => validTeams.includes(t));
+      .filter(t => VALID_TEAMS.includes(t));
 
     if (name.length < 3 || name.length > 150 || !department || department.length > 150 ||
         !Number.isInteger(batch) || batch < 1 || batch > 99)
